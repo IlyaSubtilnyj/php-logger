@@ -1,6 +1,6 @@
 <?php
 declare(strict_types = 1);
-require_once 'Classes/Logger.php';
+require_once 'logging_plugin_pack/Classes/Logger.php';
 trait LogTrait
 {
     public function __call($method, $args) : mixed
