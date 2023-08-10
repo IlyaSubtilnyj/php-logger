@@ -1,7 +1,0 @@
-{
-    "name": "ilya/testing",
-    "description": "The project with composer",
-    "type": "project",
-    "minimum-stability": "beta",
-    "require": {}
-}
