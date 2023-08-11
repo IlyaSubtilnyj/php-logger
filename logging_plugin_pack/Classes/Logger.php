@@ -1,7 +1,9 @@
 <?php
 declare(strict_types = 1);
 class Logger {
+
     const LOG_DIRECTORY = 'uploads';
+
     /**
      * @throws Exception
      */
@@ -25,6 +27,7 @@ class Logger {
      * @param string $filename
      * @param string $filePath
      * @throws Exception
+     * @todo Get method's class name and serialize it
      */
     public static function writeLog($content, string $filename = '', string $filePath = ''): void
     {
@@ -39,7 +42,6 @@ class Logger {
             if (!is_dir($filePath))
                 mkdir($filePath, 0777, true);
         }
-        //probably I can somehow get method's class name?
         $msg = date('d.m.Y H:i:s ') . ' Logger.php' . $_SERVER['SCRIPT_FILENAME'] . "# Params: " . implode(';', $content) . PHP_EOL;
         $filePath .= '/' . $filename . '.log';
         if (!error_log($msg, 3, $filePath)) {

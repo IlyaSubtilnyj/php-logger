@@ -11,17 +11,26 @@ require_once 'logging_plugin_pack/Traits/WrapperLogTrait.php';
  */
 class Wrapper extends AbstractTestClass {
 
-    //You should plug traits straight like below to be able to log and wrapper's and inner object's class methods
+    /**
+     * You should plug traits straight like below to be able to log bother wrapper's and inner object's class methods
+     * @see Wrapper::parameterizedTestFunction()
+     */
     use WrapperLogTrait, LogTrait {
         LogTrait::__call insteadof WrapperLogTrait;
         WrapperLogTrait::__call as __wltCall;
     }
+
     protected function parameterizedTestFunction(string $mes, int $num): void
     {
-        //$this->obj->parameterizedTestFunction($mes, $num);
-        //!!!upper statement doesn't log(but why?); do that if you don't need to log the inner object's method calls
+        /**
+         * $this->obj->parameterizedTestFunction($mes, $num);
+         * !!!upper statement doesn't log(but why?); do that if you don't need to log the inner object's method calls(and don't use WrapperLogTrait)
+         * @see use WrapperLogTrait, LogTrait above
+         */
 
-        //and below does log; do this if you want to log any inner object's function calls
+        /**
+         * and below does log; do this if you want to log any inner object's function calls
+         */
         $this->__wltCall('parameterizedTestFunction', array($mes, $num));
 
         echo 'Function Wrapper::parameterizedTestFunction output' . PHP_EOL;
@@ -33,6 +42,7 @@ class Wrapper extends AbstractTestClass {
         //another stuff...
         echo 'Function Wrapper::nonParameterizedTestFunction output' . PHP_EOL;
     }
+
     public function specialWrapperMethod() : void {
         //some stuff...
         echo 'Function Wrapper::specialWrapperMethod output' . PHP_EOL;
